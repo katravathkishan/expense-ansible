@@ -3,6 +3,6 @@
   become: yes
   tasks:
   - name: install mysql
-    ansible.builtin.service:
+    ansible.builtin.package:
       name: mysql-server
-      state: install
+      state: installed
