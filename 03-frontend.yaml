@@ -1,0 +1,44 @@
+- name: configure the frontend server
+  hosts: frontend
+  become: yes
+  tasks:
+  - name: install nginx server
+    ansible.builtin.dnf:
+      name: nginx
+      state: installed
+
+  - name: enable and start  the nginx
+    ansible.builtin.service:
+      name: started
+      enabled: yes
+
+  - name: delete the html dirctory
+    ansible.builtin.file:
+      path: /user/share/nginx/html
+      state: absent
+
+  - name: create html directory
+    ansible.builtin.file:
+      path: /user/share/nginx/html
+      state: present
+
+  - name: download frontend code
+    ansible.builtin.get_url:
+      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+      dest: /tmp/frontend.zip
+
+  - name: unzip frontend code
+    ansible.builtin.unarchive:
+      src: /tmp/frontend.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
+
+  - name: copy expense config
+    ansible.builtin.copy:
+      src: expence.conf
+      dest: /etc/nginx/default.d/expense.conf
+
+  - name: copy expense config
+    ansible.builtin.service:
+      state: restarted
+      name: nginx
