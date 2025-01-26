@@ -40,7 +40,7 @@
 
   - name: copy backend service
     ansible.builtin.copy:
-      sec: backend.service
+      src: backend.service
       dest: /etc/systemd/system/backend.service
 
   - name: install mysql libraries
