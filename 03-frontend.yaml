@@ -1,5 +1,5 @@
 - name: configure the frontend server
-  hosts: frontend
+  hosts: backend
   become: yes
   tasks:
   - name: install nginx server
