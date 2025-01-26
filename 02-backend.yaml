@@ -48,7 +48,7 @@
       name: PyMysql
       executable: pip3.9
 
-  - name: import mysql
+  - name: import mysql data
     community.mysql.mysql_db:
       state: import
       name: all
