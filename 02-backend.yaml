@@ -26,7 +26,7 @@
   - name: download backend code
     ansible.builtin.get_url:
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-      src: /tmp/backend.zip
+      dest: /tmp/backend.zip
 
   - name: unzip the backend code
     ansible.builtin.unarchive:
@@ -42,6 +42,11 @@
     ansible.builtin.copy:
       ser: backend.service
       dest: /etc/systemd/system/backend.service
+
+  - name: install mysql libraries
+    ansible.builtin.pip:
+      name: PyMysql
+      executable: pip3.9
 
   - name: import mysql
     community.mysql.mysql_db:
