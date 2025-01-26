@@ -30,9 +30,9 @@
 
   - name: unzip the backend code
     ansible.builtin.unarchive:
-    src: /tmp/backend.zip
-    dest: /app
-    remote_src: yes
+      src: /tmp/backend.zip
+      dest: /app
+      remote_src: yes
 
   - name: install dependencies
     community.general.npm:
