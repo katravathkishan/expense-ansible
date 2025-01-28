@@ -1,5 +1,5 @@
 - name: configure the backend server
-  hosts: mysql
+  hosts: backend
   become: yes
   tasks:
   - name: disable the current nodejs modules
